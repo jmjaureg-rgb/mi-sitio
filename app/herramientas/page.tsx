@@ -1,5 +1,5 @@
 import SiteNav from "@/components/site-nav";
-import { TrendingUp } from "lucide-react";
+import { TrendingUp, LayoutDashboard } from "lucide-react";
 
 const herramientas = [
   {
@@ -9,6 +9,16 @@ const herramientas = [
     icon: (
       <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: "rgba(201,168,76,0.15)" }}>
         <TrendingUp className="w-6 h-6" style={{ color: "#c9a84c" }} />
+      </div>
+    ),
+  },
+  {
+    titulo: "Golden Org Dashboard",
+    descripcion: "Dashboard organizacional de Golden AI Studio.",
+    href: "https://dashboard.jmjaure.com",
+    icon: (
+      <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: "rgba(201,168,76,0.15)" }}>
+        <LayoutDashboard className="w-6 h-6" style={{ color: "#c9a84c" }} />
       </div>
     ),
   },
