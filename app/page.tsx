@@ -1,4 +1,5 @@
-import { Briefcase, GraduationCap, Mail, Linkedin, TrendingUp, FileText, Building2, ChevronDown } from "lucide-react";
+import { Briefcase, Mail, Linkedin, TrendingUp, FileText, Building2, ChevronDown } from "lucide-react";
+import Image from "next/image";
 import SiteNav from "@/components/site-nav";
 
 export default function Home() {
@@ -248,14 +249,28 @@ export default function Home() {
           <div className="space-y-6">
             {[
               {
-                institucion: "CEMA",
+                logo: "/logo-cema.jpg",
+                institucion: "Universidad del CEMA",
                 titulo: "Master en Finanzas Corporativas",
                 periodo: "1998",
               },
               {
+                logo: "/logo-uces.jpg",
                 institucion: "UCES — Universidad de Ciencias Empresariales y Sociales",
                 titulo: "Lic. en Administración de Empresas",
                 periodo: "1993 — 1997",
+              },
+              {
+                logo: "/logo-stanford.jpg",
+                institucion: "Stanford University",
+                titulo: "Aprendizaje automático supervisado: Regresión y clasificación",
+                periodo: "2024",
+              },
+              {
+                logo: "/logo-wharton.jpg",
+                institucion: "Wharton Online",
+                titulo: "AI Fundamentals for Non-Data Scientists",
+                periodo: "2024",
               },
             ].map((edu, i) => (
               <div
@@ -263,8 +278,8 @@ export default function Home() {
                 className="flex items-center gap-6 p-6 rounded-xl"
                 style={{ backgroundColor: "#1a2332", border: "1px solid rgba(201,168,76,0.1)" }}
               >
-                <div className="shrink-0">
-                  <GraduationCap className="w-8 h-8" style={{ color: "#c9a84c" }} />
+                <div className="shrink-0 w-12 h-12 rounded-lg overflow-hidden bg-white flex items-center justify-center">
+                  <Image src={edu.logo} alt={edu.institucion} width={48} height={48} className="object-contain" />
                 </div>
                 <div>
                   <p className="font-semibold text-white">{edu.titulo}</p>
