@@ -118,8 +118,8 @@ export default function Home() {
         />
         <div className="relative z-10 max-w-3xl mx-auto">
           <p className="text-sm font-medium tracking-[0.3em] uppercase mb-6" style={{ color: "#c9a84c" }}>
-            CFO Fractional
-          </p>
+            Fractional CFO
+</p>
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-white">
             Juan<br />
             Jaureguialzo
@@ -159,7 +159,7 @@ export default function Home() {
             Qué ofrezco
           </p>
           <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-16">
-            Servicios de CFO Fractional
+            Servicios de Fractional CFO
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {servicios.map((s, i) => (
@@ -181,7 +181,7 @@ export default function Home() {
       <section className="py-20 px-6" style={{ backgroundColor: "#0f1923" }}>
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-sm font-medium tracking-[0.3em] uppercase mb-3" style={{ color: "#c9a84c" }}>
-            Por qué un CFO Fractional
+            Por qué un Fractional CFO
           </p>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
             Liderazgo financiero de nivel C,<br className="hidden md:block" /> sin el costo fijo
@@ -327,7 +327,7 @@ export default function Home() {
             ¿Tu empresa necesita<br />dirección financiera?
           </h2>
           <p className="text-gray-400 mb-10 leading-relaxed">
-            Analizamos juntos la situación de tu compañía y definimos cómo puedo sumar valor como tu CFO Fractional.
+            Analizamos juntos la situación de tu compañía y definimos cómo puedo sumar valor como tu Fractional CFO.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -357,7 +357,7 @@ export default function Home() {
         className="py-8 px-6 text-center text-sm text-gray-600"
         style={{ backgroundColor: "#0a1018", borderTop: "1px solid rgba(201,168,76,0.1)" }}
       >
-        <p>© 2026 Juan Maria Jaureguialzo — CFO Fractional · Buenos Aires, Argentina</p>
+        <p>© 2026 Juan Maria Jaureguialzo — Fractional CFO · Buenos Aires, Argentina</p>
       </footer>
     </div>
   );
