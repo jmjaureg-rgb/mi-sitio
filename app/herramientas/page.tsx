@@ -2,6 +2,7 @@ import SiteNav from "@/components/site-nav";
 import { TrendingUp, LayoutDashboard } from "lucide-react";
 import Image from "next/image";
 
+
 const herramientas = [
   {
     titulo: "Renta Fija",
@@ -29,6 +30,22 @@ const herramientas = [
     href: "https://openclaw.jmjaure.com",
     icon: (
       <Image src="/openclaw.png" alt="Openclaw" width={48} height={48} className="object-contain" />
+    ),
+  },
+  {
+    titulo: "Golden AI Studio",
+    descripcion: "Estudio de producción audiovisual con inteligencia artificial.",
+    href: "https://goldenstudio.ai",
+    icon: (
+      <Image src="/logo-golden.png" alt="Golden AI Studio" width={48} height={48} className="object-contain" />
+    ),
+  },
+  {
+    titulo: "Certiva Academy",
+    descripcion: "Plataforma de aprendizaje y certificación profesional.",
+    href: "https://certiva.academy",
+    icon: (
+      <Image src="/logo-certiva.png" alt="Certiva Academy" width={48} height={48} className="object-contain" />
     ),
   },
 ];
