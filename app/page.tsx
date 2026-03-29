@@ -6,7 +6,7 @@ export default function Home() {
   const experiencia = [
     {
       empresa: "Golden AI Studio",
-      cargo: "CFO & Co-Founder",
+      cargo: "CEO & Co-Founder",
       periodo: "Julio 2024 — Presente",
       descripcion:
         "Cofundé un estudio AI–audiovisual para producir piezas comerciales híbridas (live action + IA). Lidero finanzas, fundraising, estructura societaria AR/US, revenue operations y governance. Responsable de cap table, data room y alineación de P&L/FCF con crecimiento.",
