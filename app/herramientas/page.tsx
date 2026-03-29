@@ -1,5 +1,6 @@
 import SiteNav from "@/components/site-nav";
 import { TrendingUp, LayoutDashboard } from "lucide-react";
+import Image from "next/image";
 
 const herramientas = [
   {
@@ -27,7 +28,7 @@ const herramientas = [
     descripcion: "Plataforma de gestión y análisis financiero personalizado.",
     href: "https://openclaw.jmjaure.com",
     icon: (
-      <img src="/openclaw.png" alt="Openclaw" className="w-12 h-12 object-contain" />
+      <Image src="/openclaw.png" alt="Openclaw" width={48} height={48} className="object-contain" />
     ),
   },
 ];

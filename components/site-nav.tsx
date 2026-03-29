@@ -15,10 +15,10 @@ export default function SiteNav() {
       </Link>
       <div className="hidden md:flex gap-8 text-sm text-gray-400">
         <Link href="/" className="hover:text-white transition-colors">Home</Link>
-        <a href="/#servicios" className="hover:text-white transition-colors">Servicios</a>
-        <a href="/#experiencia" className="hover:text-white transition-colors">Experiencia</a>
-        <a href="/#educacion" className="hover:text-white transition-colors">Educación</a>
-        <a href="/#contacto" className="hover:text-white transition-colors">Contacto</a>
+        <Link href="/#servicios" className="hover:text-white transition-colors">Servicios</Link>
+        <Link href="/#experiencia" className="hover:text-white transition-colors">Experiencia</Link>
+        <Link href="/#educacion" className="hover:text-white transition-colors">Educación</Link>
+        <Link href="/#contacto" className="hover:text-white transition-colors">Contacto</Link>
         <Link href="/informacion-util" className="hover:text-white transition-colors">
           Información Útil
         </Link>
