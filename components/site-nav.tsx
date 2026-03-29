@@ -22,14 +22,9 @@ export default function SiteNav() {
         <Link href="/informacion-util" className="hover:text-white transition-colors">
           Información Útil
         </Link>
-        <a
-          href="https://rentafija.jmjaure.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-white transition-colors"
-        >
+        <Link href="/herramientas" className="hover:text-white transition-colors">
           Herramientas
-        </a>
+        </Link>
       </div>
       <a
         href="mailto:jmjaure@me.com"
