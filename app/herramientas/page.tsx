@@ -48,6 +48,14 @@ const herramientas = [
       <Image src="/logo-certiva.png" alt="Certiva Academy" width={48} height={48} className="object-contain" />
     ),
   },
+  {
+    titulo: "Portfolio Personal Inversiones",
+    descripcion: "Plataforma de seguimiento y gestión de inversiones personales.",
+    href: "https://www.portfoliopersonal.com/",
+    icon: (
+      <Image src="/logo-portfolio.svg" alt="Portfolio Personal" width={48} height={48} className="object-contain" />
+    ),
+  },
 ];
 
 export default function Herramientas() {
