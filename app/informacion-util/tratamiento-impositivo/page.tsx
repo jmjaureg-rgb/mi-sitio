@@ -71,115 +71,158 @@ const notas = [
   { id: "d", texto: "La Ley 27.638 ha agregado una nueva exención para estos instrumentos colocados por oferta pública de la CNV cuyo activo subyacente esté integrado como mínimo por: 1) títulos emitidos por el Estado; 2) depósitos a plazo fijo, caja de ahorro u otras formas de captación (Ley 21526); 3) ON en pesos (art. 36 Ley 23576); 4) instrumentos en pesos para fomentar la inversión productiva." },
 ];
 
-function taxColor(value: string): string {
+type Tone = "exento" | "gravado" | "neutral" | "default";
+
+function tone(value: string): Tone {
   const v = value.toLowerCase().trim();
-  if (v === "(*)") return "#6b7280";
-  if (v.startsWith("no gravado") || v.startsWith("exento")) return "#4ade80";
-  if (v.includes("gravado")) return "#f87171";
-  return "#d1d5db";
+  if (v === "(*)") return "neutral";
+  if (v.startsWith("no gravado") || v.startsWith("exento")) return "exento";
+  if (v.includes("gravado")) return "gravado";
+  return "default";
+}
+
+function toneStyle(t: Tone): React.CSSProperties {
+  switch (t) {
+    case "exento":
+      return { color: "var(--forest)" };
+    case "gravado":
+      return { color: "#A8401C" };
+    case "neutral":
+      return { color: "var(--ink-muted)" };
+    default:
+      return { color: "var(--ink-soft)" };
+  }
 }
 
 export default function TratamientoImpositivo() {
   return (
-    <div
-      className="min-h-screen text-white"
-      style={{ backgroundColor: "#0f1923", fontFamily: "var(--font-geist-sans)" }}
-    >
+    <div className="min-h-screen" style={{ backgroundColor: "var(--paper)", color: "var(--ink)" }}>
       <SiteNav />
 
-      <section className="pt-28 pb-24 px-4 md:px-6">
+      <section className="pt-32 pb-24 px-4 md:px-10">
         <div className="max-w-7xl mx-auto">
+          {/* Breadcrumb */}
+          <nav className="font-mono text-xs tracking-wider mb-10" style={{ color: "var(--ink-muted)" }}>
+            <Link href="/" className="hover:opacity-60 transition-opacity uppercase">JMJ</Link>
+            <span className="mx-2">/</span>
+            <Link href="/informacion-util" className="hover:opacity-60 transition-opacity uppercase">Información Útil</Link>
+            <span className="mx-2">/</span>
+            <span className="uppercase" style={{ color: "var(--ink)" }}>Tratamiento Impositivo</span>
+          </nav>
+
           <Link
             href="/informacion-util"
-            className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors mb-8"
+            className="inline-flex items-center gap-2 font-ui text-sm transition-colors hover:opacity-60 mb-8"
+            style={{ color: "var(--forest)" }}
           >
             <ArrowLeft className="w-4 h-4" />
-            Información Útil
+            Volver a Información Útil
           </Link>
 
-          <p className="text-sm font-medium tracking-[0.3em] uppercase mb-3" style={{ color: "#c9a84c" }}>
-            Impuestos
-          </p>
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
-            Tratamiento Impositivo de Activos Financieros
-          </h1>
-          <p className="text-gray-400 mb-8">
-            Período Fiscal 2022 — Con normativa publicada al 04/10/2022
-          </p>
+          {/* Header */}
+          <div className="grid grid-cols-12 gap-6 mb-14 items-end">
+            <div className="col-span-12 md:col-span-8">
+              <p className="label-mono mb-4">№ 01 / Impuestos</p>
+              <h1
+                className="font-display leading-[1] tracking-tight mb-4"
+                style={{ fontSize: "clamp(2rem, 4.5vw, 4rem)", fontWeight: 300, color: "var(--ink)" }}
+              >
+                Tratamiento{" "}
+                <span style={{ fontStyle: "italic", color: "var(--forest)" }}>impositivo</span>{" "}
+                de activos financieros
+              </h1>
+            </div>
+            <div className="col-span-12 md:col-span-4">
+              <div className="border-t pt-4" style={{ borderColor: "var(--rule)" }}>
+                <p className="font-mono text-xs uppercase tracking-wider mb-1" style={{ color: "var(--ink-muted)" }}>
+                  Período fiscal
+                </p>
+                <p className="font-display text-2xl" style={{ fontWeight: 400, color: "var(--ink)" }}>
+                  2022
+                </p>
+                <p className="font-serif-text text-sm mt-2" style={{ color: "var(--ink-muted)" }}>
+                  Normativa publicada al 04/10/2022
+                </p>
+              </div>
+            </div>
+          </div>
 
           {/* Leyenda */}
-          <div className="flex flex-wrap gap-6 mb-8">
+          <div className="flex flex-wrap gap-6 mb-10 pb-6 border-b" style={{ borderColor: "var(--rule)" }}>
             {[
-              { color: "#4ade80", label: "Exento / No gravado" },
-              { color: "#f87171", label: "Gravado" },
-              { color: "#6b7280", label: "No aplica (*)" },
+              { color: "var(--forest)", label: "Exento / No gravado" },
+              { color: "#A8401C", label: "Gravado" },
+              { color: "var(--ink-muted)", label: "No aplica (*)" },
             ].map((item) => (
-              <div key={item.label} className="flex items-center gap-2 text-sm text-gray-400">
-                <span className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: item.color }} />
+              <div key={item.label} className="flex items-center gap-2 font-ui text-sm" style={{ color: "var(--ink-soft)" }}>
+                <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: item.color }} />
                 {item.label}
               </div>
             ))}
           </div>
 
           {/* Tabla */}
-          <div
-            className="overflow-x-auto rounded-2xl"
-            style={{ border: "1px solid rgba(201,168,76,0.15)" }}
-          >
+          <div className="overflow-x-auto" style={{ border: "1px solid var(--rule)" }}>
             <table className="w-full text-sm border-collapse">
               <thead>
-                <tr style={{ backgroundColor: "#1a2332" }}>
+                <tr style={{ backgroundColor: "var(--paper-dark)" }}>
                   <th
                     rowSpan={2}
-                    className="text-left px-4 py-3 font-semibold text-white"
+                    className="text-left px-4 py-4 label-mono"
                     style={{
-                      borderBottom: "1px solid rgba(201,168,76,0.2)",
-                      borderRight: "1px solid rgba(201,168,76,0.15)",
+                      borderBottom: "1px solid var(--rule)",
+                      borderRight: "1px solid var(--rule)",
                       minWidth: "280px",
                       verticalAlign: "bottom",
+                      color: "var(--ink)",
                     }}
                   >
-                    Activo Financiero
+                    Activo financiero
                   </th>
                   <th
                     colSpan={2}
-                    className="text-center px-4 py-3 font-semibold"
+                    className="text-center px-4 py-3 font-ui font-semibold"
                     style={{
-                      borderBottom: "1px solid rgba(201,168,76,0.1)",
-                      borderRight: "1px solid rgba(201,168,76,0.15)",
-                      color: "#c9a84c",
+                      borderRight: "1px solid var(--rule)",
+                      color: "var(--forest)",
+                      fontSize: "0.75rem",
+                      letterSpacing: "0.18em",
+                      textTransform: "uppercase",
                     }}
                   >
                     Ganancias — P.F. 2022
                   </th>
                   <th
                     rowSpan={2}
-                    className="text-center px-4 py-3 font-semibold text-white"
+                    className="text-center px-4 py-4 label-mono"
                     style={{
-                      borderBottom: "1px solid rgba(201,168,76,0.2)",
+                      borderBottom: "1px solid var(--rule)",
                       minWidth: "180px",
                       verticalAlign: "bottom",
+                      color: "var(--ink)",
                     }}
                   >
                     Bienes Personales — P.F. 2022
                   </th>
                 </tr>
-                <tr style={{ backgroundColor: "#1a2332" }}>
+                <tr style={{ backgroundColor: "var(--paper-dark)" }}>
                   <th
-                    className="text-center px-4 py-2 font-medium text-gray-400"
+                    className="text-center px-4 py-3 label-mono"
                     style={{
-                      borderBottom: "1px solid rgba(201,168,76,0.2)",
-                      borderRight: "1px solid rgba(201,168,76,0.1)",
+                      borderTop: "1px solid var(--rule)",
+                      borderBottom: "1px solid var(--rule)",
+                      borderRight: "1px solid var(--rule)",
                       minWidth: "190px",
                     }}
                   >
                     Rendimiento
                   </th>
                   <th
-                    className="text-center px-4 py-2 font-medium text-gray-400"
+                    className="text-center px-4 py-3 label-mono"
                     style={{
-                      borderBottom: "1px solid rgba(201,168,76,0.2)",
-                      borderRight: "1px solid rgba(201,168,76,0.15)",
+                      borderTop: "1px solid var(--rule)",
+                      borderBottom: "1px solid var(--rule)",
+                      borderRight: "1px solid var(--rule)",
                       minWidth: "190px",
                     }}
                   >
@@ -191,36 +234,29 @@ export default function TratamientoImpositivo() {
                 {data.map((row, i) => (
                   <tr
                     key={i}
-                    style={{ backgroundColor: i % 2 === 0 ? "#0f1923" : "#111e2a" }}
-                    className="transition-colors hover:brightness-110"
+                    style={{ backgroundColor: i % 2 === 0 ? "var(--paper)" : "rgba(15,61,46,0.025)" }}
                   >
                     <td
-                      className="px-4 py-3 text-gray-300"
-                      style={{ borderRight: "1px solid rgba(201,168,76,0.08)" }}
+                      className="px-4 py-3 font-serif-text"
+                      style={{ borderRight: "1px solid var(--rule)", borderTop: "1px solid var(--rule)", color: "var(--ink-soft)" }}
                     >
                       {row.activo}
                     </td>
                     <td
-                      className="px-4 py-3 text-center font-medium"
-                      style={{
-                        borderRight: "1px solid rgba(201,168,76,0.08)",
-                        color: taxColor(row.rendimiento),
-                      }}
+                      className="px-4 py-3 text-center font-ui font-medium text-sm"
+                      style={{ borderRight: "1px solid var(--rule)", borderTop: "1px solid var(--rule)", ...toneStyle(tone(row.rendimiento)) }}
                     >
                       {row.rendimiento}
                     </td>
                     <td
-                      className="px-4 py-3 text-center font-medium"
-                      style={{
-                        borderRight: "1px solid rgba(201,168,76,0.08)",
-                        color: taxColor(row.enajenacion),
-                      }}
+                      className="px-4 py-3 text-center font-ui font-medium text-sm"
+                      style={{ borderRight: "1px solid var(--rule)", borderTop: "1px solid var(--rule)", ...toneStyle(tone(row.enajenacion)) }}
                     >
                       {row.enajenacion}
                     </td>
                     <td
-                      className="px-4 py-3 text-center font-medium"
-                      style={{ color: taxColor(row.bsPersonales) }}
+                      className="px-4 py-3 text-center font-ui font-medium text-sm"
+                      style={{ borderTop: "1px solid var(--rule)", ...toneStyle(tone(row.bsPersonales)) }}
                     >
                       {row.bsPersonales}
                     </td>
@@ -231,30 +267,34 @@ export default function TratamientoImpositivo() {
           </div>
 
           {/* Notas */}
-          <div
-            className="mt-10 p-6 rounded-2xl"
-            style={{ backgroundColor: "#1a2332", border: "1px solid rgba(201,168,76,0.1)" }}
-          >
-            <h2 className="text-lg font-semibold text-white mb-6">Notas y aclaraciones</h2>
-            <div className="space-y-3">
-              {notas.map((n) => (
-                <div key={n.id} className="flex gap-3 text-sm text-gray-400">
-                  <span className="shrink-0 font-semibold" style={{ color: "#c9a84c" }}>
-                    ({n.id})
-                  </span>
-                  <span>{n.texto}</span>
-                </div>
-              ))}
+          <div className="mt-12 grid grid-cols-12 gap-6">
+            <div className="col-span-12 md:col-span-3">
+              <p className="label-mono">Notas</p>
+            </div>
+            <div className="col-span-12 md:col-span-9">
+              <div className="space-y-4">
+                {notas.map((n) => (
+                  <div key={n.id} className="grid grid-cols-12 gap-4 font-serif-text text-base leading-relaxed pb-4 border-b" style={{ borderColor: "var(--rule)", color: "var(--ink-soft)" }}>
+                    <span className="col-span-2 md:col-span-1 font-mono text-sm" style={{ color: "var(--forest)" }}>
+                      ({n.id})
+                    </span>
+                    <span className="col-span-10 md:col-span-11">{n.texto}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       <footer
-        className="py-8 px-6 text-center text-sm text-gray-600"
-        style={{ backgroundColor: "#0a1018", borderTop: "1px solid rgba(201,168,76,0.1)" }}
+        className="py-8 px-6 md:px-10 font-mono text-xs tracking-wide border-t"
+        style={{ backgroundColor: "var(--forest)", color: "rgba(245,241,232,0.6)", borderColor: "rgba(245,241,232,0.12)" }}
       >
-        <p>© 2026 Juan Jaureguialzo — Fractional CFO · Buenos Aires, Argentina</p>
+        <div className="max-w-6xl mx-auto flex flex-wrap justify-between gap-4">
+          <span>© 2026 Juan María Jaureguialzo</span>
+          <span>Buenos Aires · Argentina</span>
+        </div>
       </footer>
     </div>
   );
