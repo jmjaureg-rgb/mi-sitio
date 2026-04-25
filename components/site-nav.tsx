@@ -8,33 +8,40 @@ export default function SiteNav() {
   const [open, setOpen] = useState(false);
 
   const links = [
-    { label: "Home", href: "/" },
     { label: "Servicios", href: "/#servicios" },
     { label: "Experiencia", href: "/#experiencia" },
     { label: "Educación", href: "/#educacion" },
-    { label: "Contacto", href: "/#contacto" },
     { label: "Información Útil", href: "/informacion-util" },
     { label: "Herramientas", href: "/herramientas" },
+    { label: "Contacto", href: "/#contacto" },
   ];
 
   return (
     <nav
       className="fixed top-0 left-0 right-0 z-50"
       style={{
-        backgroundColor: "rgba(15,25,35,0.95)",
-        backdropFilter: "blur(12px)",
-        borderBottom: "1px solid rgba(201,168,76,0.15)",
+        backgroundColor: "rgba(245, 241, 232, 0.92)",
+        backdropFilter: "blur(10px)",
+        borderBottom: "1px solid var(--rule)",
       }}
     >
-      <div className="flex items-center justify-between px-8 py-4">
-        <Link href="/" className="font-semibold tracking-wide text-sm" style={{ color: "#c9a84c" }}>
-          JMJ
+      <div className="flex items-center justify-between px-6 md:px-10 py-4">
+        <Link
+          href="/"
+          className="font-display text-xl tracking-tight"
+          style={{ color: "var(--forest)" }}
+        >
+          JMJ<span style={{ fontStyle: "italic", fontWeight: 300 }}>.</span>
         </Link>
 
         {/* Desktop */}
-        <div className="hidden md:flex gap-8 text-sm text-gray-400">
+        <div className="hidden md:flex items-center gap-8 font-ui text-sm" style={{ color: "var(--ink-soft)" }}>
           {links.map((l) => (
-            <Link key={l.label} href={l.href} className="hover:text-white transition-colors">
+            <Link
+              key={l.label}
+              href={l.href}
+              className="transition-colors hover:opacity-60"
+            >
               {l.label}
             </Link>
           ))}
@@ -42,15 +49,20 @@ export default function SiteNav() {
 
         <a
           href="mailto:jmjaure@me.com"
-          className="hidden md:block text-sm px-4 py-2 rounded-full font-medium transition-all"
-          style={{ backgroundColor: "#c9a84c", color: "#0f1923" }}
+          className="hidden md:inline-flex items-center font-ui text-xs tracking-[0.18em] uppercase px-5 py-2.5 transition-all hover:opacity-90"
+          style={{
+            backgroundColor: "var(--forest)",
+            color: "var(--paper)",
+            borderRadius: "9999px",
+          }}
         >
-          Contactame
+          Hablemos
         </a>
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden text-gray-400 hover:text-white transition-colors"
+          className="md:hidden transition-colors"
+          style={{ color: "var(--forest)" }}
           onClick={() => setOpen(!open)}
           aria-label="Menú"
         >
@@ -61,14 +73,18 @@ export default function SiteNav() {
       {/* Mobile menu */}
       {open && (
         <div
-          className="md:hidden px-8 pb-6 flex flex-col gap-4 text-sm text-gray-400"
-          style={{ borderTop: "1px solid rgba(201,168,76,0.1)" }}
+          className="md:hidden px-6 pb-6 flex flex-col gap-4 font-ui text-sm"
+          style={{
+            color: "var(--ink-soft)",
+            borderTop: "1px solid var(--rule)",
+            backgroundColor: "var(--paper)",
+          }}
         >
           {links.map((l) => (
             <Link
               key={l.label}
               href={l.href}
-              className="hover:text-white transition-colors py-1"
+              className="py-1 transition-colors hover:opacity-60"
               onClick={() => setOpen(false)}
             >
               {l.label}
@@ -76,11 +92,15 @@ export default function SiteNav() {
           ))}
           <a
             href="mailto:jmjaure@me.com"
-            className="mt-2 text-center px-4 py-2 rounded-full font-medium"
-            style={{ backgroundColor: "#c9a84c", color: "#0f1923" }}
+            className="mt-2 text-center font-ui text-xs tracking-[0.18em] uppercase px-5 py-3"
+            style={{
+              backgroundColor: "var(--forest)",
+              color: "var(--paper)",
+              borderRadius: "9999px",
+            }}
             onClick={() => setOpen(false)}
           >
-            Contactame
+            Hablemos
           </a>
         </div>
       )}
